@@ -1,1 +1,45 @@
 https://www.w3schools.com/angular/angular_tables.asp
+----------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Emberek listája</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-controller="customersCtrl"> 
+  <h2>Felhasználók</h2>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Név</th>
+        <th>Cím</th>
+        <th>Email</th>
+        <th>Életkor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="p in peoples">
+        <td>{{ p.name }}</td>
+        <td>{{ p.address }}</td>
+        <td>{{ p.email }}</td>
+        <td>{{ p.age }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('customersCtrl', function($scope, $http) {
+        $http.get("text.json")
+        .then(function (response) {
+            $scope.peoples = response.data;
+        });
+    });
+</script>
+
+</body>
+</html>
